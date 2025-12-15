@@ -1,5 +1,7 @@
 # Riscos e Pendências (v1)
 
+docs/09_risco_e_pendencias.md
+
 ## Riscos
 
 - Conteúdo em JSON exige disciplina de schema e validação (mas dá robustez).

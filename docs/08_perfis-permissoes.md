@@ -1,5 +1,7 @@
 # Perfis e Permissões (v1)
 
+docs/08_perfis-permissoes.md
+
 ## Perfis
 
 - ALUNO

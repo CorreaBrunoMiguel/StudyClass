@@ -1,5 +1,7 @@
 # Glossário (v1)
 
+docs/02_glossario.mdss
+
 - Curso: trilha composta por módulos em ordem definida.
 - Módulo: componente reutilizável global identificado por ID global. Pode aparecer em vários cursos.
 - Capítulo: nó da trilha dentro de um módulo. Pode ser “folha” (avaliável) ou agregador (quando tiver subcapítulos).

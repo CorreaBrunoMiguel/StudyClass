@@ -1,33 +1,37 @@
 # Avaliação e Notas (v1)
 
+docs/05_avaliacao_notas.md
+
 ## Escalas
 
 - Todas as notas são 0–100.
-- Aprovação: >= 70.
+- Aprovação (módulo): >= 70.
 
 ## NotaParticipação (unidade folha)
 
-- Definição: percentual de interações preenchidas pelo aluno.
-- Cálculo: (interaçõesPreenchidas / interaçõesTotais) \* 100
-- Ex.: 7 de 10 = 70
+- Percentual de interações preenchidas pelo aluno na unidade.
+- Cálculo: (preenchidas / totais) \* 100
 
 ## NotaParticipaçãoAcerto (unidade folha)
 
-- Definição: percentual de acertos em interações corrigíveis.
-- Cálculo: (acertos / totalCorrigíveis) \* 100
-- Ex.: 6 de 10 = 60
-- Observação: interações discursivas podem ser “corrigíveis” via IA apenas quando explicitamente configurado.
+- Percentual de acertos nas interações corrigíveis da unidade.
+- Cálculo: (acertos / corrigíveis) \* 100
 
-## NotaProva (unidade folha)
+## Prova (unidade folha)
 
-- Prova sempre ao final da unidade folha.
+- Toda unidade folha possui prova ao final.
 - Número de questões: 5 <= N <= 50
 - NotaProva é 0–100.
 
+## Regra de tentativas (prova)
+
+- A prova pode ser refeita.
+- A nota válida da prova é a **melhor tentativa** (maior nota obtida até o momento).
+- Tentativas são registradas (sem punição).
+
 ## NotaUnidade (unidade folha)
 
-Fórmula:
-NotaUnidade = (0.1 _ NotaParticipação) + (0.2 _ NotaParticipaçãoAcerto) + (0.7 \* NotaProva)
+NotaUnidade = (0.1 _ NotaParticipação) + (0.2 _ NotaParticipaçãoAcerto) + (0.7 \* NotaProvaValida)
 
 ## NotaCapítulo
 
@@ -39,8 +43,3 @@ NotaUnidade = (0.1 _ NotaParticipação) + (0.2 _ NotaParticipaçãoAcerto) + (0
 
 - NotaMódulo = média das notas dos capítulos:
   NotaMódulo = (Σ NotaCapítulo) / N
-
-## Observações (pendências futuras)
-
-- Regra de “melhor tentativa” vs “última tentativa” para prova: TODO (decisão do produto).
-- Opção de refazer apenas questões erradas: TODO (Alfa).
