@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16
+    container_name: studyclass-db
+    environment:
+      POSTGRES_DB: studyclass
+      POSTGRES_USER: studyclass
+      POSTGRES_PASSWORD: studyclass
+    ports:
+      - "5432:5432"
+    volumes:
+      - studyclass_db:/var/lib/postgresql/data
+
+volumes:
+  studyclass_db:

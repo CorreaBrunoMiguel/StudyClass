@@ -1,29 +1,25 @@
-# Stack e Arquitetura — Decisão pendente (v1)
+# Stack e Arquitetura (v1)
 
 docs/13_stack-arquitetura.md
 
-## Frontend (decidido)
+## Frontend
 
-- React (recomendação: Next.js para roteamento, SSR opcional e organização)
+- Next.js (React + App Router)
+- Tailwind CSS
 
-## Backend (pendente)
+## Backend
 
-Opção A — Node (TypeScript) + Postgres
-
-- Prós: velocidade de iteração, DTO/validação, bom encaixe com JSON schema e API rápida
-- Contras: disciplina necessária pra arquitetura “robusta”
-
-Opção B — Spring Boot (Java) + Postgres
-
-- Prós: robustez clássica, ecossistema maduro, ótimo pra domínio/regras
-- Contras: mais boilerplate e tempo pra scaffold
+- NestJS (Node + TypeScript)
+- REST API
 
 ## Banco
 
-- Postgres (JSONB para conteúdo/provas)
+- Postgres via Docker Compose (local)
+- Prisma ORM
+- Conteúdo das unidades: JSONB (decisão já registrada no modelo de dados)
 
-## Observabilidade mínima (Beta)
+## Convenções iniciais
 
-- logs estruturados
-- rastreio de erros
-- auditoria de tentativas/notas e IA
+- apps/web (porta 3000)
+- apps/api (porta 3001)
+- db (porta 5432)
