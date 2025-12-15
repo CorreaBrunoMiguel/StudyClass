@@ -1,11 +1,3 @@
-generator client {
-  provider = "prisma-client-js"
-}
-
-datasource db {
-  provider = "postgresql"
-}
-
 enum Role {
   ALUNO
   ADMIN
@@ -24,4 +16,8 @@ model EmailWhitelist {
   email     String   @id
   enabled   Boolean  @default(true)
   createdAt DateTime @default(now())
+}
+
+datasource db {
+  provider = "postgresql"
 }
