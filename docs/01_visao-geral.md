@@ -1,5 +1,7 @@
 # StudyClass — Visão Geral (v1)
 
+docs/01_visao-geral.md
+
 ## Problema
 
 Estudantes precisam de uma trilha de estudo com progressão controlada, conteúdo interativo e avaliação consistente por unidade, com apoio pontual de IA para dúvidas e feedback discursivo.

@@ -1,5 +1,7 @@
 # Regras de Negócio (v1)
 
+docs/04_regras-negocio.md
+
 ## RB01 — Ordem e progressão (curso)
 
 - Cursos têm uma lista ordenada de módulos.

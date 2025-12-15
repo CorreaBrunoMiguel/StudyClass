@@ -1,5 +1,7 @@
 # Roadmap por Gates (v1)
 
+docs/10_roadmap-fase.md
+
 ## Gate 1 — Requisitos e Regras (FECHADO)
 
 - Regras de progressão (unidade/módulo/curso)

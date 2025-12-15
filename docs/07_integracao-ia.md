@@ -1,5 +1,7 @@
 # Integração com IA (v1)
 
+docs/07_integracao-ia.md
+
 ## Uso permitido no Beta
 
 - Responder dúvidas em pontos definidos (blocos ai.prompt).
@@ -27,3 +29,8 @@
 ## Pendência
 
 - Definir valores exatos de limites (depende do orçamento de créditos).
+
+## Armazenamento e auditoria (Beta)
+
+- Registrar cada chamada de IA com: userId, unitId, blockId, timestamp, tokens/custo estimado.
+- Implementar quota/limites por usuário (configurável) para proteger créditos.

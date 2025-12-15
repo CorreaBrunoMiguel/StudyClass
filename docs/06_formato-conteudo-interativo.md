@@ -1,88 +1,66 @@
 # Formato do Conteúdo Interativo (JSON) (v1)
 
-## Premissas
+docs/06_formato-conteudo.md
 
-- A interação aluno/aplicação ocorre sempre na unidade folha (capítulo sem subcapítulos OU subcapítulo).
-- O conteúdo da unidade é um JSON composto por blocos renderizáveis.
-- O schema é extensível: novos tipos de blocos podem ser adicionados sem quebrar conteúdo antigo.
+## Decisão
 
-## Estrutura base (proposta v1)
+- O conteúdo das aulas será armazenado em **Postgres (JSONB)** por unidade.
+- A unidade mínima de interação (folha) é:
+  - Capítulo, quando não houver subcapítulos
+  - Subcapítulo, quando houver
 
-Cada unidade folha possui:
+## Estrutura do conteúdo (schemaVersion 1)
 
-- metadata (id, título, versão, etc.)
-- blocks: lista ordenada de blocos
+Cada unidade folha tem um JSON com:
 
-### Exemplo (v1)
+- schemaVersion: número
+- unitId: UUID
+- title: string
+- blocks: array ordenado
 
-```json
-{
-  "schemaVersion": 1,
-  "unitId": "unit-uuid",
-  "title": "Título da Aula",
-  "blocks": [
-    { "type": "paragraph", "id": "b1", "text": "Texto..." },
-    { "type": "callout", "id": "b2", "variant": "info", "title": "Aviso", "text": "..." },
-    {
-      "type": "interaction.multipleChoice",
-      "id": "q1",
-      "prompt": "Pergunta?",
-      "choices": [
-        { "id": "a", "text": "Opção A" },
-        { "id": "b", "text": "Opção B" }
-      ],
-      "answerKey": ["b"],
-      "requiredForParticipation": true
-    },
-    {
-      "type": "interaction.shortText",
-      "id": "q2",
-      "prompt": "Explique em 2 linhas...",
-      "grading": { "mode": "ai", "rubric": "clareza e correção conceitual" },
-      "requiredForParticipation": true
-    },
-    {
-      "type": "ai.prompt",
-      "id": "ai1",
-      "purpose": "doubt_help",
-      "systemHint": "Responda como tutor sereno e objetivo.",
-      "userPromptTemplate": "Dúvida do aluno: {{studentText}}"
-    }
-  ]
-}
-```
+## Blocos mínimos do Beta
 
-## Tipos de blocos (mínimo Beta)
+### Conteúdo
 
-Conteúdo:
-
-- paragraph
 - heading
+- paragraph
 - list
-- image (opcional no Beta)
 - callout (info/warn/tip)
 
-Interações (participação/acerto):
+### Interações (geram participação / acerto quando aplicável)
 
 - interaction.multipleChoice (corrigível)
 - interaction.trueFalse (corrigível)
 - interaction.number (corrigível)
-- interaction.shortText (pode ser corrigível via IA quando configurado)
+- interaction.shortText (pode ser corrigível via IA se configurado)
 
-IA:
+### IA
 
-- ai.prompt (pontos fixos de chamada)
+- ai.prompt (pontos explícitos para tirar dúvidas/feedback)
 
-## Eventos e rastreabilidade
+## Regras de participação e acerto
 
-Cada bloco de interação deve gerar eventos:
+- Para NotaParticipação:
+  - contar somente blocos com `requiredForParticipation: true`
+- Para NotaParticipaçãoAcerto:
+  - contar somente blocos corrigíveis (answerKey ou grading.mode definido)
+- Blocos discursivos só contam como “acerto” se `grading.mode = "ai"` e houver retorno de avaliação.
 
-- preenchido (participação)
-- avaliado (acerto/erro quando aplicável)
-- ia_called (quando houver)
+## Exemplo de bloco (múltipla escolha)
 
-## Pendências obrigatórias antes da implementação
+{
+"type": "interaction.multipleChoice",
+"id": "q1",
+"prompt": "Pergunta?",
+"choices": [{"id":"a","text":"A"},{"id":"b","text":"B"}],
+"answerKey": ["b"],
+"requiredForParticipation": true
+}
 
-- Decidir onde o JSON será armazenado no Beta:
-  - Opção 1: armazenar no banco (campo JSON por unidade)
-  - Opção 2: armazenar em arquivos versionados no repositório e carregar no runtime
+## Observação
+
+- O schema deve ser validado no backend (validação + versionamento).
+- Ao salvar conteúdo, o backend deve pré-calcular e guardar:
+  - totalRequiredInteractions
+  - totalGradableInteractions
+    para evitar reprocessar JSON a toda hora.

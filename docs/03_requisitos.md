@@ -1,5 +1,7 @@
 # Requisitos (v1)
 
+docs/03_requisitos.md
+
 ## Funcionais (RF)
 
 RF01. Cadastro/login por e-mail e senha.  
